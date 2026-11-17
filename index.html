@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="vi" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TRÍ TUỆ NHÂN TẠO TRONG ĐỜI SỐNG</title>
+    <!-- Tải Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Tải Google Fonts: Be Vietnam Pro & Inter tối ưu tiếng Việt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Tải Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Be Vietnam Pro"', 'Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        techDark: '#070b14',
+                        techCard: '#0f172a',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-slate-50 text-slate-900 dark:bg-techDark dark:text-slate-100 font-sans antialiased transition-colors duration-300 selection:bg-indigo-500 selection:text-white min-h-screen flex flex-col">
+
+    <!-- Hiệu ứng ánh sáng nền công nghệ (Ambient Glow) -->
+    <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
+        <div class="absolute -top-40 -left-40 w-[30rem] h-[30rem] bg-indigo-600/20 rounded-full blur-3xl"></div>
+        <div class="absolute top-1/3 -right-40 w-[28rem] h-[28rem] bg-purple-600/20 rounded-full blur-3xl"></div>
+        <div class="absolute -bottom-40 left-1/3 w-[32rem] h-[32rem] bg-cyan-600/15 rounded-full blur-3xl"></div>
+    </div>
+
+    <!-- Thanh điều hướng (Navbar) tối giản góc trên phải -->
+    <header class="sticky top-0 z-40 backdrop-blur-xl bg-white/80 dark:bg-techDark/80 border-b border-slate-200/80 dark:border-slate-800/80">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-end">
+            <!-- Các nút chức năng bên phải -->
+            <div class="flex items-center space-x-2 sm:space-x-3">
+                <!-- Nút hướng dẫn đăng lên GitHub Pages -->
+                <button onclick="openGithubGuide()" class="flex items-center space-x-2 px-3.5 py-2 rounded-xl bg-slate-900 dark:bg-white text-white dark:text-slate-900 text-xs sm:text-sm font-semibold hover:opacity-90 transition-all shadow-md cursor-pointer">
+                    <i class="fa-brands fa-github text-base"></i>
+                    <span class="hidden sm:inline">Đăng lên GitHub</span>
+                    <span class="sm:hidden">GitHub</span>
+                </button>
+
+                <!-- Nút chuyển đổi Sáng / Tối -->
+                <button id="themeToggle" aria-label="Chuyển đổi giao diện sáng tối" class="w-10 h-10 rounded-xl bg-slate-200/80 dark:bg-slate-800/80 hover:bg-slate-300 dark:hover:bg-slate-700 flex items-center justify-center text-slate-700 dark:text-amber-400 transition-colors cursor-pointer">
+                    <i id="themeIcon" class="fa-solid fa-sun text-base"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Nội dung chính -->
+    <main class="relative z-10 flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14 w-full">
+        
+        <!-- Phần tiêu đề chính (Hero Header) -->
+        <section class="text-center max-w-4xl mx-auto mb-12 sm:mb-16">
+            <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight mb-5 leading-snug sm:leading-[1.35] uppercase">
+                <span class="bg-clip-text text-transparent bg-gradient-to-r from-indigo-500 via-purple-500 to-cyan-400">
+                    ỨNG DỤNG TRÍ TUỆ NHÂN TẠO TRONG ĐỜI SỐNG
+                </span>
+            </h1>
+            <p class="text-slate-600 dark:text-slate-400 text-sm sm:text-lg leading-relaxed">
+                Nhấn vào lĩnh vực bên dưới để mở trình phát video minh họa trực quan
+            </p>
+        </section>
+
+        <!-- Lưới 7 Thẻ Lĩnh Vực: Hàng trên 3 cột, hàng dưới 4 cột trên màn hình lớn -->
+        <section aria-label="Danh sách 7 lĩnh vực của AI" class="space-y-6">
+            <!-- Hàng trên: 3 lĩnh vực đầu tiên -->
+            <div id="domainsTopRow" class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- 3 thẻ lĩnh vực đầu tiên sẽ được render tự động -->
+            </div>
+
+            <!-- Hàng dưới: 4 lĩnh vực còn lại -->
+            <div id="domainsBottomRow" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- 4 thẻ lĩnh vực còn lại sẽ được render tự động -->
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Chân trang (Footer) -->
+    <footer class="relative z-10 border-t border-slate-200/80 dark:border-slate-800/80 bg-white/60 dark:bg-techDark/60 backdrop-blur-md py-6 mt-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs sm:text-sm text-slate-500 dark:text-slate-400">
+            <div class="flex items-center space-x-2">
+                <i class="fa-solid fa-robot text-indigo-500"></i>
+                <span>Dự án giới thiệu 7 lĩnh vực ứng dụng AI — Sẵn sàng triển khai trên GitHub Pages.</span>
+            </div>
+            <button onclick="resetAllCustomVideos()" class="text-slate-500 hover:text-rose-500 dark:text-slate-400 dark:hover:text-rose-400 underline underline-offset-4 transition-colors cursor-pointer">
+                Khôi phục video mặc định
+            </button>
+        </div>
+    </footer>
+
+    <!-- ===================================================================== -->
+    <!-- MODAL 1: TRÌNH PHÁT VIDEO & TÙY CHỈNH LINK (VIDEO PLAYER OVERLAY)     -->
+    <!-- ===================================================================== -->
+    <div id="videoModal" role="dialog" aria-modal="true" aria-labelledby="modalDomainTitle" class="fixed inset-0 z-50 hidden items-center justify-center p-3 sm:p-6 bg-slate-950/80 backdrop-blur-md transition-opacity duration-300 opacity-0">
+        <!-- Hộp nội dung Modal -->
+        <div id="videoModalContent" class="relative w-full max-w-4xl max-h-[92vh] overflow-y-auto rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-2xl transform scale-95 transition-transform duration-300">
+            
+            <!-- Thanh Header của Modal -->
+            <div class="sticky top-0 z-20 flex items-center justify-between px-5 sm:px-7 py-4 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-b border-slate-200 dark:border-slate-800">
+                <div class="flex items-center space-x-3">
+                    <div id="modalIconWrapper" class="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 text-white flex items-center justify-center shadow-md">
+                        <i id="modalIcon" class="fa-solid fa-industry text-base"></i>
+                    </div>
+                    <div>
+                        <span id="modalSubtitle" class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 dark:text-indigo-400 block">
+                            Lĩnh vực ứng dụng AI
+                        </span>
+                        <h2 id="modalDomainTitle" class="text-lg sm:text-xl font-bold text-slate-900 dark:text-white">
+                            Tên lĩnh vực
+                        </h2>
+                    </div>
+                </div>
+
+                <!-- Các nút thao tác góc phải Modal -->
+                <div class="flex items-center space-x-2">
+                    <button id="toggleEditUrlBtn" onclick="toggleUrlEditor()" class="flex items-center space-x-1.5 px-3 py-2 rounded-xl bg-indigo-500/10 hover:bg-indigo-500/20 text-indigo-600 dark:text-indigo-400 text-xs sm:text-sm font-semibold transition-colors cursor-pointer">
+                        <i class="fa-solid fa-pen-to-square"></i>
+                        <span>Chỉnh sửa link video</span>
+                    </button>
+                    <button onclick="closeVideoModal()" aria-label="Đóng cửa sổ video" class="w-9 h-9 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-rose-500 hover:text-white dark:hover:bg-rose-600 text-slate-600 dark:text-slate-300 flex items-center justify-center transition-colors cursor-pointer">
+                        <i class="fa-solid fa-xmark text-lg"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Khu vực chỉnh sửa Link Video (Ẩn mặc định, hiện khi bấm "Chỉnh sửa link video") -->
+            <div id="urlEditorPanel" class="hidden px-5 sm:px-7 py-4 bg-indigo-50/80 dark:bg-indigo-950/40 border-b border-indigo-200/80 dark:border-indigo-800/60">
+                <label for="customVideoUrlInput" class="block text-xs font-bold uppercase tracking-wider text-indigo-700 dark:text-indigo-300 mb-2">
+                    Dán link YouTube, Google Drive hoặc link file .MP4 trực tiếp:
+                </label>
+                <div class="flex flex-col sm:flex-row gap-2.5">
+                    <input 
+                        type="url" 
+                        id="customVideoUrlInput" 
+                        placeholder="Ví dụ: https://www.youtube.com/watch?v=... hoặc https://drive.google.com/file/d/.../view" 
+                        class="flex-grow px-4 py-2.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                    />
+                    <div class="flex items-center space-x-2 shrink-0">
+                        <button onclick="saveCustomVideoUrl()" class="px-4 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-semibold shadow-md transition-colors cursor-pointer">
+                            <i class="fa-solid fa-check mr-1.5"></i>Áp dụng
+                        </button>
+                        <button onclick="resetSingleVideoUrl()" class="px-3.5 py-2.5 rounded-xl bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 text-sm font-medium transition-colors cursor-pointer" title="Quay về video gốc">
+                            Mặc định
+                        </button>
+                    </div>
+                </div>
+                <p id="urlEditorFeedback" class="mt-2 text-xs text-slate-600 dark:text-slate-400">
+                    Hỗ trợ tự động nhận diện link YouTube (watch, youtu.be, shorts), Google Drive và video MP4 trực tiếp. Thay đổi được lưu trên trình duyệt.
+                </p>
+            </div>
+
+            <!-- Nội dung chính trong Modal -->
+            <div class="p-5 sm:p-7 space-y-6">
+                <!-- Khung Trình Phát Video Responsive 16:9 -->
+                <div id="playerContainer" class="relative w-full aspect-video rounded-2xl overflow-hidden bg-slate-950 shadow-xl ring-1 ring-slate-800">
+                    <!-- Iframe cho YouTube / Google Drive -->
+                    <iframe 
+                        id="modalVideoIframe" 
+                        class="w-full h-full border-0 hidden" 
+                        src="" 
+                        title="Trình phát video AI"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                        allowfullscreen>
+                    </iframe>
+
+                    <!-- Thẻ Video HTML5 cho file MP4 trực tiếp (Hỗ trợ tốt cả video ngang 16:9 và dọc 9:16) -->
+                    <video 
+                        id="modalVideoNative" 
+                        class="w-full h-full object-contain bg-black hidden" 
+                        controls 
+                        playsinline>
+                    </video>
+                </div>
+
+                <!-- Mô tả chi tiết & Các ứng dụng tiêu biểu -->
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-start">
+                    <!-- Cột giới thiệu -->
+                    <div class="md:col-span-6 space-y-2.5">
+                        <h3 class="text-sm font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
+                            Tổng quan tác động của AI
+                        </h3>
+                        <p id="modalDescription" class="text-sm sm:text-base text-slate-700 dark:text-slate-300 leading-relaxed">
+                            Mô tả chi tiết lĩnh vực...
+                        </p>
+                    </div>
+
+                    <!-- Cột gạch đầu dòng ứng dụng thực tế -->
+                    <div class="md:col-span-6 p-4 sm:p-5 rounded-2xl bg-slate-100/80 dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-700/60">
+                        <h3 class="text-xs font-bold uppercase tracking-wider text-indigo-600 dark:text-indigo-400 mb-3 flex items-center space-x-2">
+                            <i class="fa-solid fa-sparkles"></i>
+                            <span>Ứng dụng AI thực tế tiêu biểu</span>
+                        </h3>
+                        <ul id="modalBulletPoints" class="space-y-2.5 text-sm text-slate-700 dark:text-slate-300">
+                            <!-- Các mục ứng dụng sẽ được thêm bằng JS -->
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===================================================================== -->
+    <!-- MODAL 2: HƯỚNG DẪN XUẤT BẢN LÊN GITHUB PAGES                          -->
+    <!-- ===================================================================== -->
+    <div id="githubGuideModal" role="dialog" aria-modal="true" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md transition-opacity duration-300 opacity-0">
+        <div class="relative w-full max-w-xl rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-2xl p-6 sm:p-8">
+            <div class="flex items-center justify-between mb-5">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 rounded-xl bg-slate-900 dark:bg-white text-white dark:text-slate-900 flex items-center justify-center">
+                        <i class="fa-brands fa-github text-xl"></i>
+                    </div>
+                    <h3 class="text-lg sm:text-xl font-bold">Cách đưa trang web lên GitHub Pages</h3>
+                </div>
+                <button onclick="closeGithubGuide()" class="w-9 h-9 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-rose-500 hover:text-white flex items-center justify-center transition-colors cursor-pointer">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <ol class="space-y-3.5 text-sm text-slate-600 dark:text-slate-300 list-decimal list-inside">
+                <li class="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/60">
+                    <strong class="text-slate-900 dark:text-white">Tạo Repository mới:</strong> Đăng nhập vào GitHub, nhấn <span class="font-mono text-xs px-1.5 py-0.5 rounded bg-indigo-500/10 text-indigo-500">New repository</span>, đặt tên (ví dụ: <code class="text-indigo-500">ai-domains</code>) và chọn chế độ <strong>Public</strong>.
+                </li>
+                <li class="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/60">
+                    <strong class="text-slate-900 dark:text-white">Tổ chức cấu trúc thư mục:</strong> Đặt file <strong>index.html</strong> ở thư mục gốc, cùng cấp với thư mục <strong>videos/</strong> chứa đầy đủ 7 file từ <code>video_1.mp4</code> đến <code>video_7.mp4</code>.
+                    <pre class="mt-2 p-2.5 rounded-lg bg-slate-900 text-slate-200 font-mono text-xs leading-relaxed overflow-x-auto">📁 ai-domains/
+ ├── 📄 index.html
+ └── 📁 videos/
+      ├── 🎬 video_1.mp4 (Sản xuất)
+      ├── 🎬 video_2.mp4 (Giao thông)
+      ├── 🎬 video_3.mp4 (Thương mại điện tử)
+      ├── 🎬 video_4.mp4 (Trợ lí ảo)
+      ├── 🎬 video_5.mp4 (Giáo dục)
+      ├── 🎬 video_6.mp4 (Tiếp thị)
+      └── 🎬 video_7.mp4 (Y tế)</pre>
+                </li>
+                <li class="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/60">
+                    <strong class="text-slate-900 dark:text-white">Bật GitHub Pages:</strong> Vào mục <strong>Settings</strong> &rarr; <strong>Pages</strong> (cột bên trái). Tại mục <em>Branch</em>, chọn nhánh <strong>main</strong> (thư mục <code>/root</code>) và nhấn <strong>Save</strong>.
+                </li>
+                <li class="p-3 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-700 dark:text-emerald-300">
+                    <strong>Hoàn tất!</strong> Sau khoảng 1 phút, GitHub sẽ cung cấp đường dẫn trang web trực tuyến dạng <code>https://ten-cua-ban.github.io/ai-domains/</code> để bạn chia sẻ.
+                </li>
+            </ol>
+
+            <div class="mt-6 flex justify-end">
+                <button onclick="closeGithubGuide()" class="px-5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-semibold transition-colors cursor-pointer">
+                    Đã hiểu
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Thông báo nhanh (Toast Notification) -->
+    <div id="toastNotification" class="fixed bottom-5 right-5 z-50 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none">
+        <div class="flex items-center space-x-2.5 px-4 py-3 rounded-2xl bg-slate-900 dark:bg-white text-white dark:text-slate-900 shadow-xl text-sm font-medium">
+            <i id="toastIcon" class="fa-solid fa-circle-check text-emerald-400 dark:text-emerald-600"></i>
+            <span id="toastMessage">Đã cập nhật đường dẫn video!</span>
+        </div>
+    </div>
+
+    <!-- ===================================================================== -->
+    <!-- JAVASCRIPT: DỮ LIỆU CẤU HÌNH & LOGIC XỬ LÝ VIDEO                      -->
+    <!-- ===================================================================== -->
+    <script>
+        /**
+         * =====================================================================
+         * BẢNG CẤU HÌNH 7 LĨNH VỰC CỦA AI & LINK VIDEO MẶC ĐỊNH
+         * Bạn có thể thay đổi trực tiếp các đường dẫn `defaultVideoUrl` tại đây
+         * (Hỗ trợ link YouTube, Google Drive hoặc link file .mp4 trực tiếp)
+         * =====================================================================
+         */
+        const AI_DOMAINS = [
+            {
+                id: 'san-xuat',
+                title: 'Sản Xuất',
+                englishTitle: 'Smart Semiconductor Manufacturing',
+                icon: 'fa-industry',
+                gradient: 'from-blue-500 to-cyan-500',
+                badgeColor: 'text-cyan-500 bg-cyan-500/10',
+                shortDesc: 'Tự động hóa dây chuyền sản xuất bán dẫn phòng sạch với hệ thống robot vận chuyển trên cao và giám sát thông minh.',
+                fullDesc: 'Trong các nhà máy bán dẫn và công nghiệp 4.0 hiện đại, AI điều phối toàn bộ hệ thống robot vận chuyển vật liệu tự động trên cao (OHT), cánh tay robot KUKA và quy trình kiểm soát chất lượng vi mạch trong môi trường phòng sạch tiêu chuẩn cao.',
+                defaultVideoUrl: 'videos/video_1.mp4',
+                applications: [
+                    'Hệ thống robot vận chuyển trên cao (Overhead Hoist Transport) tự động điều phối khay wafer giữa các trạm máy.',
+                    'Cánh tay robot chính xác cao thực hiện thao tác nạp và xử lý vi mạch trong môi trường phòng sạch.',
+                    'Giám sát và tối ưu hóa thông số dây chuyền sản xuất bán dẫn theo thời gian thực.'
+                ]
+            },
+            {
+                id: 'y-te',
+                title: 'Y Tế',
+                englishTitle: 'AI & Big Data in Healthcare',
+                icon: 'fa-heart-pulse',
+                gradient: 'from-rose-500 to-pink-500',
+                badgeColor: 'text-rose-500 bg-rose-500/10',
+                shortDesc: 'Ứng dụng AI và Big Data trong dự đoán bệnh sớm, giám sát sức khỏe từ xa và tối ưu hóa quản lý hồ sơ bệnh án.',
+                fullDesc: 'Sự kết hợp giữa Trí tuệ nhân tạo và Dữ liệu lớn (Big Data) đang tạo nên cuộc cách mạng y tế số: từ phân tích dữ liệu triệu chứng để chẩn đoán sớm, kết nối thiết bị đeo theo dõi sức khỏe từ xa đến dự báo nguy cơ bùng phát dịch bệnh.',
+                defaultVideoUrl: 'videos/video_7.mp4',
+                applications: [
+                    'Chẩn đoán sớm và dự báo dịch bệnh thông qua phân tích dữ liệu lớn y tế cộng đồng.',
+                    'Giám sát sức khỏe từ xa qua thiết bị đeo thông minh và đặt lịch khám trực tuyến.',
+                    'Quản lý nhân sự y tế và lưu trữ, bảo mật hồ sơ bệnh án điện tử an toàn.'
+                ]
+            },
+            {
+                id: 'tiep-thi',
+                title: 'Tiếp Thị',
+                englishTitle: 'AI-Powered Advertising & Marketing',
+                icon: 'fa-bullhorn',
+                gradient: 'from-amber-500 to-orange-500',
+                badgeColor: 'text-amber-500 bg-amber-500/10',
+                shortDesc: 'Cá nhân hóa trải nghiệm quảng cáo, thăm dò cảm xúc khách hàng và tự động hóa chiến dịch truyền thông xã hội.',
+                fullDesc: 'AI giúp các chiến dịch quảng cáo tiết kiệm đáng kể chi phí nhưng đạt hiệu quả vượt trội nhờ khả năng nhận diện cảm xúc, thăm dò phản hồi người dùng, tạo video AI và phân phối thông điệp đúng nhóm khách hàng mục tiêu.',
+                defaultVideoUrl: 'videos/video_6.mp4',
+                applications: [
+                    'Cá nhân hóa trải nghiệm mua sắm (Virtual Try-On) và điều chỉnh nội dung quảng cáo theo phản hồi người dùng.',
+                    'Phân phối quảng cáo chính xác tới đúng nhóm đối tượng mục tiêu trên Google, YouTube và mạng xã hội.',
+                    'Tự động hóa sản xuất nội dung sáng tạo và phiên livestream ứng dụng công nghệ AI.'
+                ]
+            },
+            {
+                id: 'giao-duc',
+                title: 'Giáo Dục',
+                englishTitle: 'Smart Classroom & Digital Education',
+                icon: 'fa-graduation-cap',
+                gradient: 'from-emerald-500 to-teal-500',
+                badgeColor: 'text-emerald-500 bg-emerald-500/10',
+                shortDesc: 'Chuyển đổi số trường học với kính thực tế ảo VR trong giờ Sinh học, học sinh lập trình robot và kho học liệu số.',
+                fullDesc: 'Các phòng học thông minh tích hợp AI, thực tế ảo (VR) và thiết bị số giúp học sinh trực quan hóa kiến thức phức tạp như cấu trúc tế bào, tự tay lập trình robot và tiếp cận kho thư viện điện tử phong phú.',
+                defaultVideoUrl: 'videos/video_5.mp4',
+                applications: [
+                    'Ứng dụng kính thực tế ảo (VR) mô phỏng trực quan cấu trúc tế bào và thế giới sinh học 3D sống động.',
+                    'Học sinh trực tiếp lập trình và vận hành robot thông minh ngay tại lớp học.',
+                    'Xây dựng kho học liệu số, giáo án điện tử và hệ thống kiểm tra, đánh giá tương tác tức thì.'
+                ]
+            },
+            {
+                id: 'giao-thong',
+                title: 'Giao Thông',
+                englishTitle: 'Autonomous Robotaxi & Smart Mobility',
+                icon: 'fa-car-side',
+                gradient: 'from-indigo-500 to-blue-600',
+                badgeColor: 'text-indigo-500 bg-indigo-500/10',
+                shortDesc: 'Xe taxi tự hành không người lái (Apollo Go) nhận diện đèn tín hiệu, người đi bộ và tự động điều hướng trên phố.',
+                fullDesc: 'Công nghệ lái tự động cấp độ cao cho phép xe taxi không người lái vận hành an toàn trong đô thị đông đúc, tự động dừng chờ đèn đỏ, nhường đường cho người đi bộ và xử lý linh hoạt các tình huống giao thông thực tế.',
+                defaultVideoUrl: 'videos/video_2.mp4',
+                applications: [
+                    'Vận hành dịch vụ taxi tự hành không người lái hoàn toàn trong môi trường giao thông đô thị thực tế.',
+                    'Hệ thống thị giác và cảm biến nhận diện chính xác đèn tín hiệu giao thông, làn đường và người qua đường.',
+                    'Tự động lập lộ trình tối ưu và hiển thị trực quan trạng thái di chuyển cho hành khách trên màn hình.'
+                ]
+            },
+            {
+                id: 'tro-li-ao',
+                title: 'Trợ Lí Ảo',
+                englishTitle: 'Public Administration Virtual Assistant',
+                icon: 'fa-robot',
+                gradient: 'from-purple-500 to-violet-600',
+                badgeColor: 'text-purple-500 bg-purple-500/10',
+                shortDesc: 'Trợ lý ảo hành chính công tích hợp trên VNeID hỗ trợ tra cứu hơn 1.200 dịch vụ công và giải đáp pháp luật.',
+                fullDesc: 'Trợ lý ảo AI hành chính công được chuẩn hóa từ hơn 1.200 dịch vụ công và các văn bản quy phạm pháp luật, tích hợp trực tiếp trên nền tảng VNeID giúp người dân tra cứu thủ tục, biểu mẫu nhanh chóng và phòng tránh lừa đảo.',
+                defaultVideoUrl: 'videos/video_4.mp4',
+                applications: [
+                    'Tra cứu thủ tục hành chính, quy trình hồ sơ và biểu mẫu tại các cấp xã, phường, tỉnh ngay trên VNeID.',
+                    'Giải đáp chính sách, pháp luật và hướng dẫn thông tin địa giới hành chính chính xác.',
+                    'Cảnh báo thông tin sai lệch, lừa đảo trực tuyến và hỗ trợ phổ cập kỹ năng số cho người dân.'
+                ]
+            },
+            {
+                id: 'thuong-mai-dien-tu',
+                title: 'Thương Mại Điện Tử',
+                englishTitle: 'Agentic Commerce & AI E-Commerce',
+                icon: 'fa-cart-shopping',
+                gradient: 'from-fuchsia-500 to-pink-600',
+                badgeColor: 'text-fuchsia-500 bg-fuchsia-500/10',
+                shortDesc: 'Kỷ nguyên Agentic Commerce với trợ lý AI tự động tư vấn chốt đơn 24/7, quản trị doanh nghiệp và chống hàng giả.',
+                fullDesc: 'Thương mại điện tử đang bước vào kỷ nguyên Agentic Commerce nơi các AI Agent tự động hóa toàn diện hành trình mua sắm: từ tư vấn khách hàng xuyên đêm, sáng tạo nội dung bán hàng đến truy xuất nguồn gốc chống hàng giả.',
+                defaultVideoUrl: 'videos/video_3.mp4',
+                applications: [
+                    'Trợ lý ảo bán hàng (như Sapo Assistant) tự động chăm sóc, tư vấn và chốt đơn cho khách hàng 24/7.',
+                    'Ứng dụng AI Agent trong quản trị vận hành, thiết kế sản phẩm và tự động hóa livestream đa kênh.',
+                    'Hỗ trợ người tiêu dùng truy xuất nguồn gốc, nhận diện và so sánh chống hàng giả, hàng nhái.'
+                ]
+            }
+        ];
+
+        // Khóa lưu trữ LocalStorage cho các đường dẫn video người dùng tự chỉnh sửa
+        const STORAGE_KEY = 'ai_horizon_custom_videos_v1';
+        let currentActiveDomainId = null;
+
+        // =====================================================================
+        // 1. CHUYỂN ĐỔI LINK VIDEO & QUẢN LÝ LƯU TRỮ
+        // =====================================================================
+        function parseVideoSource(rawUrl) {
+            if (!rawUrl || typeof rawUrl !== 'string') {
+                return { type: 'native', embedUrl: '' };
+            }
+
+            const url = rawUrl.trim();
+
+            // 1. Kiểm tra nếu là file video trực tiếp (.mp4, .webm, .ogg)
+            if (/\.(mp4|webm|ogg)(\?.*)?$/i.test(url)) {
+                return { type: 'native', embedUrl: url };
+            }
+
+            // 2. Kiểm tra link YouTube (watch?v=, youtu.be/, embed/, shorts/)
+            const ytRegex = /(?:youtube\.com\/(?:watch\?v=|embed\/|shorts\/|v\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})/;
+            const ytMatch = url.match(ytRegex);
+            if (ytMatch && ytMatch[1]) {
+                const videoId = ytMatch[1];
+                return {
+                    type: 'iframe',
+                    embedUrl: `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1`
+                };
+            }
+
+            // 3. Kiểm tra link Google Drive (drive.google.com/file/d/FILE_ID/view hoặc open?id=FILE_ID)
+            const driveFileRegex = /drive\.google\.com\/file\/d\/([a-zA-Z0-9_-]+)/;
+            const driveOpenRegex = /drive\.google\.com\/open\?id=([a-zA-Z0-9_-]+)/;
+            const driveMatch = url.match(driveFileRegex) || url.match(driveOpenRegex);
+            if (driveMatch && driveMatch[1]) {
+                const fileId = driveMatch[1];
+                return {
+                    type: 'iframe',
+                    embedUrl: `https://drive.google.com/file/d/${fileId}/preview`
+                };
+            }
+
+            // 4. Các đường dẫn nhúng iframe khác giữ nguyên
+            return { type: 'iframe', embedUrl: url };
+        }
+
+        // Lấy danh sách video đã tùy chỉnh từ LocalStorage
+        function getSavedCustomVideos() {
+            try {
+                const data = localStorage.getItem(STORAGE_KEY);
+                return data ? JSON.parse(data) : {};
+            } catch (e) {
+                return {};
+            }
+        }
+
+        // Lấy URL hiện tại của một lĩnh vực (ưu tiên link tùy chỉnh nếu có)
+        function getDomainVideoUrl(domain) {
+            const saved = getSavedCustomVideos();
+            return saved[domain.id] || domain.defaultVideoUrl;
+        }
+
+        // =====================================================================
+        // 2. RENDER LƯỚI 7 THẺ LĨNH VỰC (HÀNG TRÊN 3 THẺ, HÀNG DƯỚI 4 THẺ)
+        // =====================================================================
+        function createDomainCardHTML(domain, index, savedVideos) {
+            const isCustomized = Boolean(savedVideos[domain.id]);
+            return `
+                <article 
+                    onclick="openVideoModal('${domain.id}')"
+                    role="button"
+                    tabindex="0"
+                    onkeydown="if(event.key==='Enter' || event.key===' ') { event.preventDefault(); openVideoModal('${domain.id}'); }"
+                    aria-label="Xem video về AI trong lĩnh vực ${domain.title}"
+                    class="group relative flex flex-col justify-between rounded-3xl p-6 bg-white/85 dark:bg-slate-900/80 backdrop-blur-xl border border-slate-200/90 dark:border-slate-800/90 hover:border-indigo-500/60 dark:hover:border-indigo-400/60 shadow-lg hover:shadow-2xl hover:shadow-indigo-500/15 hover:-translate-y-1.5 transition-all duration-300 cursor-pointer overflow-hidden"
+                >
+                    <!-- Hiệu ứng ánh sáng góc thẻ khi hover -->
+                    <div class="absolute -right-12 -top-12 w-32 h-32 rounded-full bg-gradient-to-br ${domain.gradient} opacity-10 group-hover:opacity-25 blur-2xl transition-opacity duration-300"></div>
+
+                    <div>
+                        <!-- Hàng trên: Icon & Số thứ tự -->
+                        <div class="flex items-center justify-between mb-5">
+                            <div class="w-12 h-12 rounded-2xl bg-gradient-to-br ${domain.gradient} text-white flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
+                                <i class="fa-solid ${domain.icon} text-xl"></i>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                ${isCustomized ? `<span class="px-2 py-0.5 rounded-full text-[10px] font-semibold bg-emerald-500/15 text-emerald-600 dark:text-emerald-400">Đã gắn link</span>` : ''}
+                                <span class="text-xs font-extrabold px-2.5 py-1 rounded-full ${domain.badgeColor}">
+                                    0${index + 1}
+                                </span>
+                            </div>
+                        </div>
+
+                        <!-- Tiêu đề lĩnh vực -->
+                        <div class="mb-2.5">
+                            <span class="text-[11px] font-semibold uppercase tracking-wider text-slate-400 dark:text-slate-500 block">
+                                ${domain.englishTitle}
+                            </span>
+                            <h2 class="text-xl font-bold text-slate-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
+                                ${domain.title}
+                            </h2>
+                        </div>
+
+                        <!-- Mô tả ngắn -->
+                        <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed mb-6">
+                            ${domain.shortDesc}
+                        </p>
+                    </div>
+
+                    <!-- Nút hành động Xem Video -->
+                    <div class="pt-4 border-t border-slate-100 dark:border-slate-800/80 flex items-center justify-between">
+                        <span class="inline-flex items-center space-x-2 text-sm font-bold text-indigo-600 dark:text-indigo-400 group-hover:translate-x-1 transition-transform">
+                            <span class="w-7 h-7 rounded-full bg-indigo-500/15 flex items-center justify-center group-hover:bg-indigo-600 group-hover:text-white transition-colors">
+                                <i class="fa-solid fa-play text-[10px] ml-0.5"></i>
+                            </span>
+                            <span>Xem Video</span>
+                        </span>
+                        <i class="fa-solid fa-arrow-right text-xs text-slate-400 group-hover:text-indigo-500 group-hover:translate-x-1 transition-all"></i>
+                    </div>
+                </article>
+            `;
+        }
+
+        function renderDomainCards() {
+            const topRow = document.getElementById('domainsTopRow');
+            const bottomRow = document.getElementById('domainsBottomRow');
+            const savedVideos = getSavedCustomVideos();
+
+            const topDomains = AI_DOMAINS.slice(0, 3);
+            const bottomDomains = AI_DOMAINS.slice(3, 7);
+
+            topRow.innerHTML = topDomains
+                .map((domain, idx) => createDomainCardHTML(domain, idx, savedVideos))
+                .join('');
+
+            bottomRow.innerHTML = bottomDomains
+                .map((domain, idx) => createDomainCardHTML(domain, idx + 3, savedVideos))
+                .join('');
+        }
+
+        // =====================================================================
+        // 3. ĐIỀU KHIỂN MODAL TRÌNH PHÁT VIDEO
+        // =====================================================================
+        function openVideoModal(domainId) {
+            const domain = AI_DOMAINS.find(d => d.id === domainId);
+            if (!domain) return;
+
+            currentActiveDomainId = domainId;
+
+            // Cập nhật thông tin tiêu đề & biểu tượng trên Modal
+            document.getElementById('modalDomainTitle').textContent = `AI Trong ${domain.title}`;
+            document.getElementById('modalSubtitle').textContent = domain.englishTitle;
+            document.getElementById('modalDescription').textContent = domain.fullDesc;
+
+            const iconEl = document.getElementById('modalIcon');
+            iconEl.className = `fa-solid ${domain.icon} text-base`;
+
+            const iconWrapper = document.getElementById('modalIconWrapper');
+            iconWrapper.className = `w-10 h-10 rounded-xl bg-gradient-to-br ${domain.gradient} text-white flex items-center justify-center shadow-md`;
+
+            // Render các gạch đầu dòng ứng dụng tiêu biểu
+            const bulletsEl = document.getElementById('modalBulletPoints');
+            bulletsEl.innerHTML = domain.applications.map(item => `
+                <li class="flex items-start space-x-2.5">
+                    <i class="fa-solid fa-circle-check text-indigo-500 mt-1 shrink-0 text-xs"></i>
+                    <span>${item}</span>
+                </li>
+            `).join('');
+
+            // Nạp đường dẫn video hiện tại vào ô nhập liệu và trình phát
+            const currentUrl = getDomainVideoUrl(domain);
+            document.getElementById('customVideoUrlInput').value = currentUrl;
+            document.getElementById('urlEditorPanel').classList.add('hidden');
+            loadVideoIntoPlayer(currentUrl);
+
+            // Hiển thị Modal với hiệu ứng mượt mà
+            const modal = document.getElementById('videoModal');
+            const modalContent = document.getElementById('videoModalContent');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            
+            // Kích hoạt animation
+            requestAnimationFrame(() => {
+                modal.classList.remove('opacity-0');
+                modalContent.classList.remove('scale-95');
+                modalContent.classList.add('scale-100');
+            });
+
+            // Khóa cuộn trang nền
+            document.body.style.overflow = 'hidden';
+        }
+
+        function loadVideoIntoPlayer(rawUrl) {
+            const parsed = parseVideoSource(rawUrl);
+            const iframeEl = document.getElementById('modalVideoIframe');
+            const nativeVideoEl = document.getElementById('modalVideoNative');
+
+            // Dừng cả 2 trình phát trước khi nạp nguồn mới
+            iframeEl.src = '';
+            nativeVideoEl.pause();
+            nativeVideoEl.removeAttribute('src');
+            nativeVideoEl.load();
+
+            if (parsed.type === 'native') {
+                iframeEl.classList.add('hidden');
+                nativeVideoEl.classList.remove('hidden');
+                nativeVideoEl.src = parsed.embedUrl;
+                nativeVideoEl.play().catch(() => {
+                    // Trình duyệt có thể chặn autoplay có tiếng, người dùng nhấn Play thủ công
+                });
+            } else {
+                nativeVideoEl.classList.add('hidden');
+                iframeEl.classList.remove('hidden');
+                iframeEl.src = parsed.embedUrl;
+            }
+        }
+
+        function closeVideoModal() {
+            const modal = document.getElementById('videoModal');
+            const modalContent = document.getElementById('videoModalContent');
+            const iframeEl = document.getElementById('modalVideoIframe');
+            const nativeVideoEl = document.getElementById('modalVideoNative');
+
+            // Bắt buộc dừng phát video ngay khi đóng Modal
+            iframeEl.src = '';
+            nativeVideoEl.pause();
+            nativeVideoEl.removeAttribute('src');
+            nativeVideoEl.load();
+
+            // Hiệu ứng đóng Modal
+            modal.classList.add('opacity-0');
+            modalContent.classList.remove('scale-100');
+            modalContent.classList.add('scale-95');
+
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+                document.body.style.overflow = '';
+                currentActiveDomainId = null;
+            }, 250);
+        }
+
+        // =====================================================================
+        // 4. TÙY CHỈNH LINK VIDEO TRỰC TIẾP TRÊN GIAO DIỆN
+        // =====================================================================
+        function toggleUrlEditor() {
+            const panel = document.getElementById('urlEditorPanel');
+            panel.classList.toggle('hidden');
+            if (!panel.classList.contains('hidden')) {
+                document.getElementById('customVideoUrlInput').focus();
+            }
+        }
+
+        function saveCustomVideoUrl() {
+            if (!currentActiveDomainId) return;
+            const inputEl = document.getElementById('customVideoUrlInput');
+            const newUrl = inputEl.value.trim();
+
+            if (!newUrl) {
+                showToast('Vui lòng nhập đường dẫn video hợp lệ!', 'error');
+                return;
+            }
+
+            try {
+                const saved = getSavedCustomVideos();
+                saved[currentActiveDomainId] = newUrl;
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(saved));
+                
+                loadVideoIntoPlayer(newUrl);
+                renderDomainCards();
+                showToast('Đã lưu và phát video mới thành công!', 'success');
+            } catch (e) {
+                loadVideoIntoPlayer(newUrl);
+                showToast('Đã áp dụng video mới!', 'success');
+            }
+        }
+
+        function resetSingleVideoUrl() {
+            if (!currentActiveDomainId) return;
+            const domain = AI_DOMAINS.find(d => d.id === currentActiveDomainId);
+            if (!domain) return;
+
+            const saved = getSavedCustomVideos();
+            delete saved[currentActiveDomainId];
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(saved));
+
+            document.getElementById('customVideoUrlInput').value = domain.defaultVideoUrl;
+            loadVideoIntoPlayer(domain.defaultVideoUrl);
+            renderDomainCards();
+            showToast('Đã khôi phục video mặc định của lĩnh vực này.', 'success');
+        }
+
+        function resetAllCustomVideos() {
+            localStorage.removeItem(STORAGE_KEY);
+            renderDomainCards();
+            showToast('Đã khôi phục toàn bộ video về mặc định!', 'success');
+        }
+
+        // =====================================================================
+        // 5. MODAL HƯỚNG DẪN GITHUB, DARK MODE & SỰ KIỆN BÀN PHÍM
+        // =====================================================================
+        function openGithubGuide() {
+            const modal = document.getElementById('githubGuideModal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            requestAnimationFrame(() => modal.classList.remove('opacity-0'));
+        }
+
+        function closeGithubGuide() {
+            const modal = document.getElementById('githubGuideModal');
+            modal.classList.add('opacity-0');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+            }, 250);
+        }
+
+        function showToast(message, type = 'success') {
+            const toast = document.getElementById('toastNotification');
+            const msgEl = document.getElementById('toastMessage');
+            const iconEl = document.getElementById('toastIcon');
+
+            msgEl.textContent = message;
+            iconEl.className = type === 'error' 
+                ? 'fa-solid fa-circle-exclamation text-rose-500' 
+                : 'fa-solid fa-circle-check text-emerald-400 dark:text-emerald-600';
+
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 3000);
+        }
+
+        // Chuyển đổi giao diện Sáng / Tối
+        const themeToggleBtn = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+
+        themeToggleBtn.addEventListener('click', () => {
+            const htmlEl = document.documentElement;
+            htmlEl.classList.toggle('dark');
+            const isDark = htmlEl.classList.contains('dark');
+            themeIcon.className = isDark ? 'fa-solid fa-sun text-base' : 'fa-solid fa-moon text-base';
+        });
+
+        // Đóng modal khi click ra ngoài vùng nội dung hoặc nhấn phím ESC
+        document.getElementById('videoModal').addEventListener('click', (e) => {
+            if (e.target.id === 'videoModal') closeVideoModal();
+        });
+
+        document.getElementById('githubGuideModal').addEventListener('click', (e) => {
+            if (e.target.id === 'githubGuideModal') closeGithubGuide();
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeVideoModal();
+                closeGithubGuide();
+            }
+        });
+
+        // Khởi tạo giao diện khi tải trang
+        document.addEventListener('DOMContentLoaded', () => {
+            renderDomainCards();
+        });
+    </script>
+</body>
+</html>
