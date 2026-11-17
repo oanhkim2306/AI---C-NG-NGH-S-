@@ -39,28 +39,8 @@
         <div class="absolute -bottom-40 left-1/3 w-[32rem] h-[32rem] bg-cyan-600/15 rounded-full blur-3xl"></div>
     </div>
 
-    <!-- Thanh điều hướng (Navbar) tối giản góc trên phải -->
-    <header class="sticky top-0 z-40 backdrop-blur-xl bg-white/80 dark:bg-techDark/80 border-b border-slate-200/80 dark:border-slate-800/80">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-end">
-            <!-- Các nút chức năng bên phải -->
-            <div class="flex items-center space-x-2 sm:space-x-3">
-                <!-- Nút hướng dẫn đăng lên GitHub Pages -->
-                <button onclick="openGithubGuide()" class="flex items-center space-x-2 px-3.5 py-2 rounded-xl bg-slate-900 dark:bg-white text-white dark:text-slate-900 text-xs sm:text-sm font-semibold hover:opacity-90 transition-all shadow-md cursor-pointer">
-                    <i class="fa-brands fa-github text-base"></i>
-                    <span class="hidden sm:inline">Đăng lên GitHub</span>
-                    <span class="sm:hidden">GitHub</span>
-                </button>
-
-                <!-- Nút chuyển đổi Sáng / Tối -->
-                <button id="themeToggle" aria-label="Chuyển đổi giao diện sáng tối" class="w-10 h-10 rounded-xl bg-slate-200/80 dark:bg-slate-800/80 hover:bg-slate-300 dark:hover:bg-slate-700 flex items-center justify-center text-slate-700 dark:text-amber-400 transition-colors cursor-pointer">
-                    <i id="themeIcon" class="fa-solid fa-sun text-base"></i>
-                </button>
-            </div>
-        </div>
-    </header>
-
     <!-- Nội dung chính -->
-    <main class="relative z-10 flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14 w-full">
+    <main class="relative z-10 flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 w-full">
         
         <!-- Phần tiêu đề chính (Hero Header) -->
         <section class="text-center max-w-4xl mx-auto mb-12 sm:mb-16">
@@ -91,19 +71,16 @@
 
     <!-- Chân trang (Footer) -->
     <footer class="relative z-10 border-t border-slate-200/80 dark:border-slate-800/80 bg-white/60 dark:bg-techDark/60 backdrop-blur-md py-6 mt-12">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs sm:text-sm text-slate-500 dark:text-slate-400">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-center text-xs sm:text-sm text-slate-500 dark:text-slate-400">
             <div class="flex items-center space-x-2">
                 <i class="fa-solid fa-robot text-indigo-500"></i>
                 <span>Dự án giới thiệu 7 lĩnh vực ứng dụng AI — Sẵn sàng triển khai trên GitHub Pages.</span>
             </div>
-            <button onclick="resetAllCustomVideos()" class="text-slate-500 hover:text-rose-500 dark:text-slate-400 dark:hover:text-rose-400 underline underline-offset-4 transition-colors cursor-pointer">
-                Khôi phục video mặc định
-            </button>
         </div>
     </footer>
 
     <!-- ===================================================================== -->
-    <!-- MODAL 1: TRÌNH PHÁT VIDEO & TÙY CHỈNH LINK (VIDEO PLAYER OVERLAY)     -->
+    <!-- MODAL 1: TRÌNH PHÁT VIDEO (VIDEO PLAYER OVERLAY)                      -->
     <!-- ===================================================================== -->
     <div id="videoModal" role="dialog" aria-modal="true" aria-labelledby="modalDomainTitle" class="fixed inset-0 z-50 hidden items-center justify-center p-3 sm:p-6 bg-slate-950/80 backdrop-blur-md transition-opacity duration-300 opacity-0">
         <!-- Hộp nội dung Modal -->
@@ -125,42 +102,12 @@
                     </div>
                 </div>
 
-                <!-- Các nút thao tác góc phải Modal -->
+                <!-- Nút đóng góc phải Modal -->
                 <div class="flex items-center space-x-2">
-                    <button id="toggleEditUrlBtn" onclick="toggleUrlEditor()" class="flex items-center space-x-1.5 px-3 py-2 rounded-xl bg-indigo-500/10 hover:bg-indigo-500/20 text-indigo-600 dark:text-indigo-400 text-xs sm:text-sm font-semibold transition-colors cursor-pointer">
-                        <i class="fa-solid fa-pen-to-square"></i>
-                        <span>Chỉnh sửa link video</span>
-                    </button>
                     <button onclick="closeVideoModal()" aria-label="Đóng cửa sổ video" class="w-9 h-9 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-rose-500 hover:text-white dark:hover:bg-rose-600 text-slate-600 dark:text-slate-300 flex items-center justify-center transition-colors cursor-pointer">
                         <i class="fa-solid fa-xmark text-lg"></i>
                     </button>
                 </div>
-            </div>
-
-            <!-- Khu vực chỉnh sửa Link Video (Ẩn mặc định, hiện khi bấm "Chỉnh sửa link video") -->
-            <div id="urlEditorPanel" class="hidden px-5 sm:px-7 py-4 bg-indigo-50/80 dark:bg-indigo-950/40 border-b border-indigo-200/80 dark:border-indigo-800/60">
-                <label for="customVideoUrlInput" class="block text-xs font-bold uppercase tracking-wider text-indigo-700 dark:text-indigo-300 mb-2">
-                    Dán link YouTube, Google Drive hoặc link file .MP4 trực tiếp:
-                </label>
-                <div class="flex flex-col sm:flex-row gap-2.5">
-                    <input 
-                        type="url" 
-                        id="customVideoUrlInput" 
-                        placeholder="Ví dụ: https://www.youtube.com/watch?v=... hoặc https://drive.google.com/file/d/.../view" 
-                        class="flex-grow px-4 py-2.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                    />
-                    <div class="flex items-center space-x-2 shrink-0">
-                        <button onclick="saveCustomVideoUrl()" class="px-4 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-semibold shadow-md transition-colors cursor-pointer">
-                            <i class="fa-solid fa-check mr-1.5"></i>Áp dụng
-                        </button>
-                        <button onclick="resetSingleVideoUrl()" class="px-3.5 py-2.5 rounded-xl bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 text-sm font-medium transition-colors cursor-pointer" title="Quay về video gốc">
-                            Mặc định
-                        </button>
-                    </div>
-                </div>
-                <p id="urlEditorFeedback" class="mt-2 text-xs text-slate-600 dark:text-slate-400">
-                    Hỗ trợ tự động nhận diện link YouTube (watch, youtu.be, shorts), Google Drive và video MP4 trực tiếp. Thay đổi được lưu trên trình duyệt.
-                </p>
             </div>
 
             <!-- Nội dung chính trong Modal -->
@@ -210,64 +157,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-
-    <!-- ===================================================================== -->
-    <!-- MODAL 2: HƯỚNG DẪN XUẤT BẢN LÊN GITHUB PAGES                          -->
-    <!-- ===================================================================== -->
-    <div id="githubGuideModal" role="dialog" aria-modal="true" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md transition-opacity duration-300 opacity-0">
-        <div class="relative w-full max-w-xl rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-2xl p-6 sm:p-8">
-            <div class="flex items-center justify-between mb-5">
-                <div class="flex items-center space-x-3">
-                    <div class="w-10 h-10 rounded-xl bg-slate-900 dark:bg-white text-white dark:text-slate-900 flex items-center justify-center">
-                        <i class="fa-brands fa-github text-xl"></i>
-                    </div>
-                    <h3 class="text-lg sm:text-xl font-bold">Cách đưa trang web lên GitHub Pages</h3>
-                </div>
-                <button onclick="closeGithubGuide()" class="w-9 h-9 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-rose-500 hover:text-white flex items-center justify-center transition-colors cursor-pointer">
-                    <i class="fa-solid fa-xmark"></i>
-                </button>
-            </div>
-
-            <ol class="space-y-3.5 text-sm text-slate-600 dark:text-slate-300 list-decimal list-inside">
-                <li class="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/60">
-                    <strong class="text-slate-900 dark:text-white">Tạo Repository mới:</strong> Đăng nhập vào GitHub, nhấn <span class="font-mono text-xs px-1.5 py-0.5 rounded bg-indigo-500/10 text-indigo-500">New repository</span>, đặt tên (ví dụ: <code class="text-indigo-500">ai-domains</code>) và chọn chế độ <strong>Public</strong>.
-                </li>
-                <li class="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/60">
-                    <strong class="text-slate-900 dark:text-white">Tổ chức cấu trúc thư mục:</strong> Đặt file <strong>index.html</strong> ở thư mục gốc, cùng cấp với thư mục <strong>videos/</strong> chứa đầy đủ 7 file từ <code>video_1.mp4</code> đến <code>video_7.mp4</code>.
-                    <pre class="mt-2 p-2.5 rounded-lg bg-slate-900 text-slate-200 font-mono text-xs leading-relaxed overflow-x-auto">📁 ai-domains/
- ├── 📄 index.html
- └── 📁 videos/
-      ├── 🎬 video_1.mp4 (Sản xuất)
-      ├── 🎬 video_2.mp4 (Giao thông)
-      ├── 🎬 video_3.mp4 (Thương mại điện tử)
-      ├── 🎬 video_4.mp4 (Trợ lí ảo)
-      ├── 🎬 video_5.mp4 (Giáo dục)
-      ├── 🎬 video_6.mp4 (Tiếp thị)
-      └── 🎬 video_7.mp4 (Y tế)</pre>
-                </li>
-                <li class="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/60">
-                    <strong class="text-slate-900 dark:text-white">Bật GitHub Pages:</strong> Vào mục <strong>Settings</strong> &rarr; <strong>Pages</strong> (cột bên trái). Tại mục <em>Branch</em>, chọn nhánh <strong>main</strong> (thư mục <code>/root</code>) và nhấn <strong>Save</strong>.
-                </li>
-                <li class="p-3 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-700 dark:text-emerald-300">
-                    <strong>Hoàn tất!</strong> Sau khoảng 1 phút, GitHub sẽ cung cấp đường dẫn trang web trực tuyến dạng <code>https://ten-cua-ban.github.io/ai-domains/</code> để bạn chia sẻ.
-                </li>
-            </ol>
-
-            <div class="mt-6 flex justify-end">
-                <button onclick="closeGithubGuide()" class="px-5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-semibold transition-colors cursor-pointer">
-                    Đã hiểu
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Thông báo nhanh (Toast Notification) -->
-    <div id="toastNotification" class="fixed bottom-5 right-5 z-50 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none">
-        <div class="flex items-center space-x-2.5 px-4 py-3 rounded-2xl bg-slate-900 dark:bg-white text-white dark:text-slate-900 shadow-xl text-sm font-medium">
-            <i id="toastIcon" class="fa-solid fa-circle-check text-emerald-400 dark:text-emerald-600"></i>
-            <span id="toastMessage">Đã cập nhật đường dẫn video!</span>
         </div>
     </div>
 
@@ -397,12 +286,8 @@
             }
         ];
 
-        // Khóa lưu trữ LocalStorage cho các đường dẫn video người dùng tự chỉnh sửa
-        const STORAGE_KEY = 'ai_horizon_custom_videos_v1';
-        let currentActiveDomainId = null;
-
         // =====================================================================
-        // 1. CHUYỂN ĐỔI LINK VIDEO & QUẢN LÝ LƯU TRỮ
+        // 1. CHUYỂN ĐỔI LINK VIDEO
         // =====================================================================
         function parseVideoSource(rawUrl) {
             if (!rawUrl || typeof rawUrl !== 'string') {
@@ -443,27 +328,10 @@
             return { type: 'iframe', embedUrl: url };
         }
 
-        // Lấy danh sách video đã tùy chỉnh từ LocalStorage
-        function getSavedCustomVideos() {
-            try {
-                const data = localStorage.getItem(STORAGE_KEY);
-                return data ? JSON.parse(data) : {};
-            } catch (e) {
-                return {};
-            }
-        }
-
-        // Lấy URL hiện tại của một lĩnh vực (ưu tiên link tùy chỉnh nếu có)
-        function getDomainVideoUrl(domain) {
-            const saved = getSavedCustomVideos();
-            return saved[domain.id] || domain.defaultVideoUrl;
-        }
-
         // =====================================================================
         // 2. RENDER LƯỚI 7 THẺ LĨNH VỰC (HÀNG TRÊN 3 THẺ, HÀNG DƯỚI 4 THẺ)
         // =====================================================================
-        function createDomainCardHTML(domain, index, savedVideos) {
-            const isCustomized = Boolean(savedVideos[domain.id]);
+        function createDomainCardHTML(domain, index) {
             return `
                 <article 
                     onclick="openVideoModal('${domain.id}')"
@@ -482,12 +350,9 @@
                             <div class="w-12 h-12 rounded-2xl bg-gradient-to-br ${domain.gradient} text-white flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
                                 <i class="fa-solid ${domain.icon} text-xl"></i>
                             </div>
-                            <div class="flex items-center space-x-2">
-                                ${isCustomized ? `<span class="px-2 py-0.5 rounded-full text-[10px] font-semibold bg-emerald-500/15 text-emerald-600 dark:text-emerald-400">Đã gắn link</span>` : ''}
-                                <span class="text-xs font-extrabold px-2.5 py-1 rounded-full ${domain.badgeColor}">
-                                    0${index + 1}
-                                </span>
-                            </div>
+                            <span class="text-xs font-extrabold px-2.5 py-1 rounded-full ${domain.badgeColor}">
+                                0${index + 1}
+                            </span>
                         </div>
 
                         <!-- Tiêu đề lĩnh vực -->
@@ -523,17 +388,16 @@
         function renderDomainCards() {
             const topRow = document.getElementById('domainsTopRow');
             const bottomRow = document.getElementById('domainsBottomRow');
-            const savedVideos = getSavedCustomVideos();
 
             const topDomains = AI_DOMAINS.slice(0, 3);
             const bottomDomains = AI_DOMAINS.slice(3, 7);
 
             topRow.innerHTML = topDomains
-                .map((domain, idx) => createDomainCardHTML(domain, idx, savedVideos))
+                .map((domain, idx) => createDomainCardHTML(domain, idx))
                 .join('');
 
             bottomRow.innerHTML = bottomDomains
-                .map((domain, idx) => createDomainCardHTML(domain, idx + 3, savedVideos))
+                .map((domain, idx) => createDomainCardHTML(domain, idx + 3))
                 .join('');
         }
 
@@ -543,8 +407,6 @@
         function openVideoModal(domainId) {
             const domain = AI_DOMAINS.find(d => d.id === domainId);
             if (!domain) return;
-
-            currentActiveDomainId = domainId;
 
             // Cập nhật thông tin tiêu đề & biểu tượng trên Modal
             document.getElementById('modalDomainTitle').textContent = `AI Trong ${domain.title}`;
@@ -566,11 +428,8 @@
                 </li>
             `).join('');
 
-            // Nạp đường dẫn video hiện tại vào ô nhập liệu và trình phát
-            const currentUrl = getDomainVideoUrl(domain);
-            document.getElementById('customVideoUrlInput').value = currentUrl;
-            document.getElementById('urlEditorPanel').classList.add('hidden');
-            loadVideoIntoPlayer(currentUrl);
+            // Nạp đường dẫn video mặc định vào trình phát
+            loadVideoIntoPlayer(domain.defaultVideoUrl);
 
             // Hiển thị Modal với hiệu ứng mượt mà
             const modal = document.getElementById('videoModal');
@@ -635,125 +494,19 @@
                 modal.classList.add('hidden');
                 modal.classList.remove('flex');
                 document.body.style.overflow = '';
-                currentActiveDomainId = null;
             }, 250);
         }
 
         // =====================================================================
-        // 4. TÙY CHỈNH LINK VIDEO TRỰC TIẾP TRÊN GIAO DIỆN
+        // 4. SỰ KIỆN BÀN PHÍM & KHỞI TẠO
         // =====================================================================
-        function toggleUrlEditor() {
-            const panel = document.getElementById('urlEditorPanel');
-            panel.classList.toggle('hidden');
-            if (!panel.classList.contains('hidden')) {
-                document.getElementById('customVideoUrlInput').focus();
-            }
-        }
-
-        function saveCustomVideoUrl() {
-            if (!currentActiveDomainId) return;
-            const inputEl = document.getElementById('customVideoUrlInput');
-            const newUrl = inputEl.value.trim();
-
-            if (!newUrl) {
-                showToast('Vui lòng nhập đường dẫn video hợp lệ!', 'error');
-                return;
-            }
-
-            try {
-                const saved = getSavedCustomVideos();
-                saved[currentActiveDomainId] = newUrl;
-                localStorage.setItem(STORAGE_KEY, JSON.stringify(saved));
-                
-                loadVideoIntoPlayer(newUrl);
-                renderDomainCards();
-                showToast('Đã lưu và phát video mới thành công!', 'success');
-            } catch (e) {
-                loadVideoIntoPlayer(newUrl);
-                showToast('Đã áp dụng video mới!', 'success');
-            }
-        }
-
-        function resetSingleVideoUrl() {
-            if (!currentActiveDomainId) return;
-            const domain = AI_DOMAINS.find(d => d.id === currentActiveDomainId);
-            if (!domain) return;
-
-            const saved = getSavedCustomVideos();
-            delete saved[currentActiveDomainId];
-            localStorage.setItem(STORAGE_KEY, JSON.stringify(saved));
-
-            document.getElementById('customVideoUrlInput').value = domain.defaultVideoUrl;
-            loadVideoIntoPlayer(domain.defaultVideoUrl);
-            renderDomainCards();
-            showToast('Đã khôi phục video mặc định của lĩnh vực này.', 'success');
-        }
-
-        function resetAllCustomVideos() {
-            localStorage.removeItem(STORAGE_KEY);
-            renderDomainCards();
-            showToast('Đã khôi phục toàn bộ video về mặc định!', 'success');
-        }
-
-        // =====================================================================
-        // 5. MODAL HƯỚNG DẪN GITHUB, DARK MODE & SỰ KIỆN BÀN PHÍM
-        // =====================================================================
-        function openGithubGuide() {
-            const modal = document.getElementById('githubGuideModal');
-            modal.classList.remove('hidden');
-            modal.classList.add('flex');
-            requestAnimationFrame(() => modal.classList.remove('opacity-0'));
-        }
-
-        function closeGithubGuide() {
-            const modal = document.getElementById('githubGuideModal');
-            modal.classList.add('opacity-0');
-            setTimeout(() => {
-                modal.classList.add('hidden');
-                modal.classList.remove('flex');
-            }, 250);
-        }
-
-        function showToast(message, type = 'success') {
-            const toast = document.getElementById('toastNotification');
-            const msgEl = document.getElementById('toastMessage');
-            const iconEl = document.getElementById('toastIcon');
-
-            msgEl.textContent = message;
-            iconEl.className = type === 'error' 
-                ? 'fa-solid fa-circle-exclamation text-rose-500' 
-                : 'fa-solid fa-circle-check text-emerald-400 dark:text-emerald-600';
-
-            toast.classList.remove('translate-y-20', 'opacity-0');
-            setTimeout(() => {
-                toast.classList.add('translate-y-20', 'opacity-0');
-            }, 3000);
-        }
-
-        // Chuyển đổi giao diện Sáng / Tối
-        const themeToggleBtn = document.getElementById('themeToggle');
-        const themeIcon = document.getElementById('themeIcon');
-
-        themeToggleBtn.addEventListener('click', () => {
-            const htmlEl = document.documentElement;
-            htmlEl.classList.toggle('dark');
-            const isDark = htmlEl.classList.contains('dark');
-            themeIcon.className = isDark ? 'fa-solid fa-sun text-base' : 'fa-solid fa-moon text-base';
-        });
-
-        // Đóng modal khi click ra ngoài vùng nội dung hoặc nhấn phím ESC
         document.getElementById('videoModal').addEventListener('click', (e) => {
             if (e.target.id === 'videoModal') closeVideoModal();
-        });
-
-        document.getElementById('githubGuideModal').addEventListener('click', (e) => {
-            if (e.target.id === 'githubGuideModal') closeGithubGuide();
         });
 
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') {
                 closeVideoModal();
-                closeGithubGuide();
             }
         });
 
